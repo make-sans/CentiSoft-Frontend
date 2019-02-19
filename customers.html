@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>CentiSoft API</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
-<body>
+<body class="container">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -35,21 +36,73 @@
             </div>
         </div>
     </div>
-    <div class="container">                   
+    <div class="container">
         <h1>Customers</h1>
 
-        <div class="row">
-            <button id="btn-create-customer" class="btn btn-primary btn-block">Add customer</button>
-            <div id="create-customer-input">
-                <input class="input" type="text"/>
+        <div class="row mb-4">
+            <button id="btn-create-customer" onclick="showInput()" class="btn btn-primary btn-block">Add
+                customer</button>
+            <div style="display:none;" class="container " id="create-customer-input">
+                <form class="p-4 shadow-sm">
+                    <div class="row justify-content-center">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" placeholder="Address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address2">Address 2</label>
+                                <input type="text" class="form-control" id="address2" placeholder="Address 2" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">Zip</label>
+                                <input type="text" class="form-control" id="zip" placeholder="Zip" required>
+                            </div>
+
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" placeholder="City" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" id="country" placeholder="Country" required>
+                            </div>
+                            <div class="form-group">
+
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Enter email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" id="phone" placeholder="Enter phone nr."
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
+                        </div>
+                    </div>
+
+
+                </form>
             </div>
         </div>
         <div class="row">
- <table class="table">
+            <table class="table">
                 <thead id="tHead">
                 </thead>
                 <tbody id="tableBody">
-
                 </tbody>
             </table>
         </div>

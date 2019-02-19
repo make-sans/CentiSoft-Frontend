@@ -38,7 +38,18 @@
     </div>
     <div class="container">
         <h1>Customers</h1>
+        <!--search customer part-->
+        <div class="row justify-content-end no-gutters mb-4">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="searchInput" placeholder="Customer name">
+            </div>
 
+            <div class="col-md-2 ml-3"> 
+                <button class="btn btn-info btn-block">Search</button>
+            </div>
+
+        </div>
+        <!-- add customer part-->
         <div class="row mb-4">
             <button id="btn-create-customer" onclick="showInput()" class="btn btn-primary btn-block">Add
                 customer</button>
@@ -56,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="address2">Address 2</label>
-                                <input type="text" class="form-control" id="address2" placeholder="Address 2" required>
+                                <input type="text" class="form-control" id="address2" placeholder="Address 2">
                             </div>
                             <div class="form-group">
                                 <label for="zip">Zip</label>
@@ -98,6 +109,7 @@
                 </form>
             </div>
         </div>
+        <!--table part-->
         <div class="row">
             <table class="table">
                 <thead id="tHead">

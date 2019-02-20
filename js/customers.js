@@ -162,6 +162,7 @@ $('#createForm').submit(function () {
     return true;
 });
 
+
 //after submitting the update form this gets called
 $('#updateForm').submit(function () {
     let customerArray = $('#updateForm').serializeArray();
@@ -173,8 +174,9 @@ $('#updateForm').submit(function () {
     return true;
 });
 
+
 //show-hide the create customer form
-function showInput() {
+    function showInput() {
     var div = document.getElementById("create-customer-input");
     if (div.style.display === "none") {
         div.style.display = "block";

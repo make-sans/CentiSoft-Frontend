@@ -38,7 +38,7 @@
     animation-duration: 0.4s
   }
   
-  /* Add Animation */
+  /* Animation */
   @-webkit-keyframes animatetop {
     from {
         transform: scale(0);
@@ -52,22 +52,7 @@
         } 
     to {transform: scale(1); }
   }
-  
-  /* The Close Button */
-  /* .close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  } */
-  
+
   .modal-header {
     background-color: #5cb85c;
     color: white;

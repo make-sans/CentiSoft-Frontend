@@ -11,7 +11,8 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>CentiSoft API</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 
 </head>
@@ -47,7 +48,7 @@
                 <input type="text" class="form-control" id="searchInput" placeholder="Customer name">
             </div>
 
-            <div class="col-md-2 ml-3"> 
+            <div class="col-md-2 ml-3">
                 <button id="searchButton" class="btn btn-info btn-block">Search</button>
             </div>
 
@@ -62,42 +63,48 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input value="John Doe" name="Name" type="text" class="form-control" id="name" placeholder="Enter name" required>
+                                <input value="John Doe" name="Name" type="text" class="form-control" id="name"
+                                    placeholder="Enter name" required>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input value="John Doe street" name="Address" type="text" class="form-control" id="address" placeholder="Address" required>
+                                <input value="John Doe street" name="Address" type="text" class="form-control"
+                                    id="address" placeholder="Address" required>
                             </div>
                             <div class="form-group">
                                 <label for="address2">Address 2</label>
-                                <input  name="Address2" type="text" class="form-control" id="address2" placeholder="Address 2">
+                                <input name="Address2" type="text" class="form-control" id="address2"
+                                    placeholder="Address 2">
                             </div>
                             <div class="form-group">
                                 <label for="zip">Zip</label>
-                                <input value="9000" name="Zip" type="text" class="form-control" id="zip" placeholder="Zip" required>
+                                <input value="9000" name="Zip" type="text" class="form-control" id="zip"
+                                    placeholder="Zip" required>
                             </div>
 
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="city">City</label>
-                                <input value="Groblaa" name="City" type="text" class="form-control" id="city" placeholder="City" required>
+                                <input value="Groblaa" name="City" type="text" class="form-control" id="city"
+                                    placeholder="City" required>
                             </div>
                             <div class="form-group">
                                 <label for="country">Country</label>
-                                <input value="Uzbekistan" name="Country" type="text" class="form-control" id="country" placeholder="Country" required>
+                                <input value="Uzbekistan" name="Country" type="text" class="form-control" id="country"
+                                    placeholder="Country" required>
                             </div>
                             <div class="form-group">
 
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input value="johnnyD@gmail.com" name="Email" type="email" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Enter email" required>
+                                <input value="johnnyD@gmail.com" name="Email" type="email" class="form-control"
+                                    id="exampleInputEmail1" placeholder="Enter email" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input value="939393" name="Phone" type="text" class="form-control" id="phone" placeholder="Enter phone nr."
-                                    required>
+                                <input value="939393" name="Phone" type="text" class="form-control" id="phone"
+                                    placeholder="Enter phone nr." required>
                             </div>
                         </div>
                     </div>
@@ -120,6 +127,85 @@
                 <tbody id="tableBody">
                 </tbody>
             </table>
+        </div>
+
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Detail view</h2>
+                        <i class="fas fa-times"></i>
+                        <!-- <span class="close">&times;</span> -->
+
+                </div>                   
+            <form id="updateForm">
+
+                <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-5">
+                                    <div class="form-group">
+                                            <label for="id">Id</label>
+                                            <input name="Id" type="text" class="form-control" id="id" readonly>
+                                        </div>
+
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input value="John Doe" name="Name" type="text" class="form-control" id="name"
+                                        placeholder="Enter name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input value="John Doe street" name="Address" type="text" class="form-control"
+                                        id="address" placeholder="Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address2">Address 2</label>
+                                    <input name="Address2" type="text" class="form-control" id="address2"
+                                        placeholder="Address 2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="zip">Zip</label>
+                                    <input value="9000" name="Zip" type="text" class="form-control" id="zip"
+                                        placeholder="Zip" required>
+                                </div>
+
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input value="Groblaa" name="City" type="text" class="form-control" id="city"
+                                        placeholder="City" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input value="Uzbekistan" name="Country" type="text" class="form-control"
+                                        id="country" placeholder="Country" required>
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input value="johnnyD@gmail.com" name="Email" type="email" class="form-control"
+                                        id="email" placeholder="Enter email" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input value="939393" name="Phone" type="text" class="form-control" id="phone"
+                                        placeholder="Enter phone nr." required>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="updateButton" class="btn btn-primary" type="submit">Update</button>
+                </div>
+
+                </form>
+
+            </div>
+
         </div>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

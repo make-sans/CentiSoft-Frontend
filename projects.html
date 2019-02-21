@@ -1,0 +1,202 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>CentiSoft API projects</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a href="index.html" class="navbar-brand">CentiSoft</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
+                aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-content">
+            <div class="navbar-nav">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="developers.html" class="nav-item nav-link">Developers</a>
+                <a href="#" class="nav-item nav-link active">Projects</a>
+                <a href="customers.html" class="nav-item nav-link">Customers</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- projects -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 border m-4">
+                <h1>Projects</h1>
+                <form id="getProjectsForm">
+                    <div class="form-group">
+                        <label for="customerIdInput">Customer ID</label>
+                        <input type="number" class="form-control" id="customerIdInput" placeholder="Enter the customers ID">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get customer's projects</button>
+                </form>
+
+                <!-- New project -->
+                <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#newProjectModal">Add new project</button>
+                <!-- New project modal -->
+                <div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newProjectModalLabel">Add a new project</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addNewProjectForm">
+                                    <div class="form-group">
+                                        <label for="projectNameInput">Project Name</label>
+                                        <input type="text" class="form-control" id="projectNameInput" name="Name" placeholder="Enter the project name">
+
+                                        <label for="projectDueDateInput">Project due date</label>
+                                        <input type="date" class="form-control" id="projectDueDateInput" name="DueDate" placeholder="Enter the project's due date">
+
+                                        <label for="projectCustomerIdInput">Customer's id</label>
+                                        <input type="number" class="form-control" id="projectCustomerIdInput" name="CustomerId" placeholder="Enter the customer's id">
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>List of Customer's projects</h2>
+                <template id="projectsListTemplate">
+                    <tr>
+                        <th scope="row" class="project-id"></th>
+                        <td class="project-name"></td>
+                        <td class="project-duedate"></td>
+                        <td class="project-customerid"></td>
+                        <td><button class="btn btn-danger delete-this">Delete</button></td>
+                    </tr>
+                </template>
+                <table class="table" id="projectsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Project Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Customer ID</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasks -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 border m-4">
+                <h1>Tasks</h1>
+                <form id="getTasksForm">
+                    <div class="form-group">
+                        <label for="projectIdInput">Project ID</label>
+                        <input type="number" class="form-control" id="projectIdInput" placeholder="Enter the project ID">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get the project tasks</button>
+                </form>
+
+                <!-- New task -->
+                <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#newTaskModal">Add new task</button>
+                <!-- New task modal -->
+                <div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newTaskModalLabel">Add a new task</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addNewTaskForm">
+                                    <div class="form-group">
+                                        <label for="taskNameInput">Task Name</label>
+                                        <input type="text" class="form-control" id="taskNameInput" name="Name" placeholder="Enter the task name">
+
+                                        <label for="taskDescriptionInput">Task description</label>
+                                        <input type="text" class="form-control" id="taskDescriptionInput" name="Description" placeholder="Enter the task description">
+
+                                        <label for="taskDurationInput">Task duration</label>
+                                        <input type="number" class="form-control" id="taskDurationInput" name="Duration" placeholder="Enter the task duration">
+
+                                        <label for="taskProjectIdInput">Project id</label>
+                                        <input type="number" class="form-control" id="taskProjectIdInput" name="ProjectId" placeholder="Enter the project id">
+
+                                        <label for="taskDeveloperIdInput">Developer id</label>
+                                        <input type="number" class="form-control" id="taskDeveloperIdInput" name="DeveloperId" placeholder="Enter the Developer id">
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>List of project's tasks</h2>
+                <template id="tasksListTemplate">
+                    <tr>
+                        <th scope="row" class="task-id"></th>
+                        <td class="task-name"></td>
+                        <td class="task-description"></td>
+                        <td class="task-created"></td>
+                        <td class="task-duration"></td>
+                        <td class="task-projectid"></td>
+                        <td class="task-developerid"></td>
+                        <td><button class="btn btn-danger delete-this">Delete</button></td>
+                    </tr>
+                </template>
+                <table class="table" id="tasksTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Task Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Created</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Project Id</th>
+                            <th scope="col">Developer Id</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <!-- scripts -->
+    <script src="js/projecttask.js"></script>
+</body>
+
+</html>

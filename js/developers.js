@@ -5,14 +5,16 @@ const TABLE_CATEGORIES = ["ID", "Name", "Email"]
 
 function createDevTable(categories) {
     let table = $("<table></table>").addClass("table")
-    let tableHeaderRow = $("<thead><tr></tr></thead>")
+    let tableHead = $("<thead></thead>")
+    let tableHeadRow = $("<tr></tr>")
     let tableBody = $("<tbody></tbody")
 
     categories.forEach(category => {
+        console.log(category)
         let tableHeader = $("<th scope='col'></th>").text(category)
-        tableHeaderRow.append(tableHeader)
+        tableHeadRow.append(tableHeader)
     })
-
+    table.append(tableHead.append(tableHeadRow))
     table.append(tableBody)
 
     return table

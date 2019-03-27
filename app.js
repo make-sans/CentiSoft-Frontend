@@ -5,6 +5,8 @@ let cookieParser = require('cookie-parser');
 
 let app = express();
 
+const port = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -26,4 +28,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Client server listening on ${port}`);
+})

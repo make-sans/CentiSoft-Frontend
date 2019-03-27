@@ -1,4 +1,4 @@
-    const URL_CUSTOMER = 'http://localhost:57422/api/customers/';
+    const URL_CUSTOMER = 'http://localhost:5000/api/customers/';
     const CENTISOFT_TOKEN = 'VerySecretToken1'
     const tableHeader = ['Id','Name','Email', 'ClientId', 'Delete','Show']
 
@@ -84,19 +84,19 @@
                 //     tRow.appendChild(tData);
                 // })
                 let tData = document.createElement("td");
-                tData.innerHTML = obj.Id;
+                tData.innerHTML = obj._id;
                 tRow.appendChild(tData);
                 
             tData = document.createElement("td");
-            tData.innerHTML = obj['Name'];
+            tData.innerHTML = obj['name'];
             tRow.appendChild(tData);
 
             tData = document.createElement("td");
-            tData.innerHTML = obj['Email'];
+            tData.innerHTML = obj['email'];
             tRow.appendChild(tData);
             
             tData = document.createElement("td");
-            tData.innerHTML = obj['ClientId'];
+            tData.innerHTML = obj['_id'];
             tRow.appendChild(tData);
             
             
@@ -124,15 +124,15 @@
             $("#myModal").hide();
         })
 
-        $("#myModal #id").val(obj.Id)
-        $("#myModal #name").val(obj.Name)
-        $("#myModal #address").val(obj.Address)
-        $("#myModal #address2").val(obj.Address2)
-        $("#myModal #zip").val(obj.Zip)
-        $("#myModal #city").val(obj.City)
-        $("#myModal #country").val(obj.Country)
-        $("#myModal #email").val(obj.Email)
-        $("#myModal #phone").val(obj.Phone)
+        $("#myModal #id").val(obj._id)
+        $("#myModal #name").val(obj.name)
+        $("#myModal #address").val(obj.address)
+        $("#myModal #address2").val(obj.address2)
+        $("#myModal #zip").val(obj.zip)
+        $("#myModal #city").val(obj.city)
+        $("#myModal #country").val(obj.country)
+        $("#myModal #email").val(obj.email)
+        $("#myModal #phone").val(obj.phone)
         $("#myModal").show(); 
     }
 
@@ -165,13 +165,22 @@
 
 
     //after submitting the update form this gets called
-    $('#updateForm').submit(function () {
+    $('#updateForm').submit(function (e) {
+        e.preventDefault()
         let customerArray = $('#updateForm').serializeArray();
         let customer = {};
         customerArray.map((item) => {
             customer[item['name']] = item['value']
         })
-        postCustomer(customer, customer.id)
+        $.ajax({
+            method: "PUT",
+            data: customer,
+            url: url + customer.id,
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+        // postCustomer(customer, customer.id)
         return true;
     });
 

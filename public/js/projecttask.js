@@ -79,8 +79,8 @@ $("#addNewProjectForm").submit(function(e) {
   let customerId = $(this)
     .find("#projectCustomerIdInput")
     .val();
-  if (isNaN(customerId) || !customerId.length > 0) {
-    alert("Given customer id is not a number or is invalid!");
+  if (!customerId.length > 0) {
+    alert("Customer id is required!");
     return;
   }
 
@@ -95,13 +95,19 @@ $("#addNewProjectForm").submit(function(e) {
   let url =
     hostname + ":" + port + "/api/customers/" + customerId + "/projects";
   console.log(url);
-  console.log($(this).serialize());
+  let jsondata = {};
+  let serializedArray = $(this).serializeArray();
+
+  serializedArray.forEach(field => {
+    jsondata[field["name"]] = field["value"];
+  });
+  console.log(JSON.stringify(jsondata));
   // actual request
   $.ajax({
     method: "POST",
     url: url,
-    headers: { centisoft_token: "VerySecretToken1" },
-    data: $(this).serialize()
+    headers: { "content-type": "application/json" },
+    data: JSON.stringify(jsondata)
   })
     .done(function() {
       // close modal when successful
@@ -138,7 +144,8 @@ $("#projectsTable").on("click", ".delete-this", function() {
     .html(
       `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...`
     );
-
+  console.log(customerId, deleteId);
+  console.log(url);
   $.ajax({
     method: "DELETE",
     url: url,
@@ -173,7 +180,7 @@ $("#getTasksForm").submit(function(e) {
     .find("#projectIdInput")
     .val();
   if (projectId.length <= 0) {
-    alert("Given projeasd");
+    alert("Project id is required!");
 
     return;
   }
@@ -192,7 +199,7 @@ $("#getTasksForm").submit(function(e) {
   $.ajax({
     method: "GET",
     url: url,
-    headers: { centisoft_token: "VerySecretToken1" }
+    headers: { "content-type": "application/json" }
   })
     .done(function(msg) {
       // clear last results
@@ -211,17 +218,17 @@ $("#getTasksForm").submit(function(e) {
           let clone = document.importNode(taskTemplate.content, true);
 
           // assign content to template
-          clone.querySelector(".task-id").innerHTML = value.Id;
-          clone.querySelector(".task-name").innerHTML = value.Name;
+          clone.querySelector(".task-id").innerHTML = value._id;
+          clone.querySelector(".task-name").innerHTML = value.name;
           clone.querySelector(".task-description").innerHTML =
-            value.Description;
-          clone.querySelector(".task-created").innerHTML = value.Created;
-          clone.querySelector(".task-duration").innerHTML = value.Duration;
-          clone.querySelector(".task-projectid").innerHTML = value.ProjectId;
+            value.description;
+          clone.querySelector(".task-created").innerHTML = value.created;
+          clone.querySelector(".task-duration").innerHTML = value.duration;
+          clone.querySelector(".task-projectid").innerHTML = value.projectId;
           clone.querySelector(".task-developerid").innerHTML =
-            value.DeveloperId;
+            value.developerId;
           clone.querySelector(".delete-this").value =
-            value.ProjectId + "|" + value.Id;
+            value.projectId + "|" + value._id;
 
           // use the template
           taskTableBody.appendChild(clone);
@@ -246,7 +253,7 @@ $("#addNewTaskForm").submit(function(e) {
   let projectId = $(this)
     .find("#taskProjectIdInput")
     .val();
-  if (isNaN(projectId) || !projectId.length > 0) {
+  if (!projectId.length > 0) {
     alert("Given project id is not a number or is invalid!");
     return;
   }
@@ -261,19 +268,19 @@ $("#addNewTaskForm").submit(function(e) {
 
   let url = hostname + ":" + port + "/api/projects/" + projectId + "/tasks";
   console.log(url);
-  console.log($(this).serialize());
+  let jsondata = {};
+  let serializedArray = $(this).serializeArray();
+
+  serializedArray.forEach(field => {
+    jsondata[field["name"]] = field["value"];
+  });
+  console.log(JSON.stringify(jsondata));
   // actual request
   $.ajax({
     method: "POST",
     url: url,
-    headers: { centisoft_token: "VerySecretToken1" },
-    data:
-      $(this).serialize() +
-      "&Created=" +
-      new Date()
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " ")
+    headers: { "content-type": "application/json" },
+    data: JSON.stringify(jsondata)
   })
     .done(function() {
       // close modal when successful
@@ -294,7 +301,8 @@ $("#tasksTable").on("click", ".delete-this", function() {
     .split("|");
   let projectId = deleteValue[0];
   let deleteId = deleteValue[1];
-  let url = hostname + ":" + port + "/api/projects/" + projectId + "/tasks";
+  let url =
+    hostname + ":" + port + "/api/projects/" + projectId + "/tasks/" + deleteId;
 
   // display loading
   let deleteButton = $(this);

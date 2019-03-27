@@ -1,5 +1,5 @@
 const HOSTNAME = "http://localhost"
-const PORT = 57422
+const PORT = 5000
 const SECRET_TOKEN = "VerySecretToken1"
 const TABLE_CATEGORIES = ["ID", "Name", "Email"]
 
@@ -23,9 +23,9 @@ function createDevTable(categories) {
 function addDeveloperToTable(developer, table) {
     let row = $("<tr></tr>")
     
-    let id = $(`<th scope="row">${developer.Id}</th>`)
-    let name = $(`<td>${developer.Name}</td>`)
-    let email = $(`<td>${developer.Email}</td>`)
+    let id = $(`<th scope="row">${developer._id}</th>`)
+    let name = $(`<td>${developer.name}</td>`)
+    let email = $(`<td>${developer.email}</td>`)
 
     table.find("tbody").append(row.append(id).append(name).append(email))
 }
@@ -33,9 +33,10 @@ function addDeveloperToTable(developer, table) {
 function getDevelopers(container) {
     let table = createDevTable(TABLE_CATEGORIES)
     container.empty()
+    console.log(HOSTNAME + ":" + PORT + "/api/developers")
 
     $.ajax({
-        method: "GET",
+        method: "get",
         url: HOSTNAME + ":" + PORT + "/api/developers",
         dataType: "json",
         headers: {
@@ -47,7 +48,7 @@ function getDevelopers(container) {
             })
         },
         error: (data) => {
-            alert("Something went wrong, please contact developers")
+            alert("Can't connect to server")
             console.error(data)
         },
     })
@@ -62,20 +63,32 @@ function setupListeners() {
 
     $("#submit-developer").click((event) => {
         event.preventDefault()
+
+        let jsondata = {};
+        let serializedArray = $("#add-developer-form").serializeArray()
+
+        serializedArray.forEach((field) => {
+            jsondata[field['name']] = field['value']
+        })
+
+        console.log(JSON.stringify(jsondata))
+        
         $.ajax({
             method: "POST",
             url: HOSTNAME + ":" + PORT + "/api/developers",
-            data: $("#add-developer-form").serialize(),
+            data: JSON.stringify(jsondata),
             headers: {
+                "content-type": "application/json",
                 "centisoft_token": SECRET_TOKEN,
             },
             success: (newDeveloper) => {
                 addDeveloperToTable(newDeveloper, $("#dev-container").find("table"))
             },
-            error: (data) => {
-                console.log(data)
+            error: (err) => {
+                console.log(err)
             }
         })
+        
     })
 }
 
